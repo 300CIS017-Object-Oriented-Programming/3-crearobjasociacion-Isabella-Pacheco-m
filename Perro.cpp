@@ -6,15 +6,15 @@
 Perro::Perro() {
     // Constructor por defecto
     this->edad = 0;
-    this->raza = "";
     this->tamanio = "";
     this->color = "";
     this->pPropietario = nullptr;
-    this->pVeterinario = nullptr; // Inicializar el puntero a nullptr
+    this->pVeterinario = nullptr;
+    this->pRaza = nullptr;
 }
 
-Perro::Perro(std::string nombre, int edad, std::string raza, std::string color, std::string tamanio)
-    : nombre(nombre), edad(edad), raza(raza), color(color), tamanio(tamanio), pPropietario(nullptr), pVeterinario(nullptr) {
+Perro::Perro(std::string nombre, int edad, Raza* pRaza, std::string color, std::string tamanio)
+    : nombre(nombre), edad(edad), pRaza(pRaza), color(color), tamanio(tamanio), pPropietario(nullptr), pVeterinario(nullptr) {
     // Constructor con parámetros usando lista de inicialización
 }
 
@@ -23,8 +23,6 @@ void Perro::ladrar() {
 }
 
 void Perro::agregarPropietario(std::string nombre, std::string docIdentidad, int edad) {
-    // Asocia a la variable de instancia pPropietario un nuevo pPropietario
-    // Es memoria dinámica, en el destructor se debe liberar
     this->pPropietario = new Propietario(nombre, docIdentidad, edad);
 }
 
@@ -32,14 +30,12 @@ void Perro::setPropietario(Propietario* pPropietario) {
     this->pPropietario = pPropietario;
 }
 
-Propietario* Perro::getPropietario() {
-    return this->pPropietario;
+void Perro::asociarVeterinario(std::string nombreVeterinario, int aniosExperiencia) {
+    this->pVeterinario = new Veterinario(nombreVeterinario, aniosExperiencia);
 }
 
-void Perro::asociarVeterinario(std::string nombreVeterinario, int aniosExperiencia) {
-    // Asocia a la variable de instancia pVeterinario un nuevo Veterinario
-    // Es memoria dinámica, en el destructor se debe liberar
-    this->pVeterinario = new Veterinario(nombreVeterinario, aniosExperiencia);
+void Perro::asociarRaza(Raza* pRaza) {
+    this->pRaza = pRaza;
 }
 
 int Perro::getEdad() {
@@ -50,12 +46,20 @@ void Perro::setEdad(int edad) {
     this->edad = edad;
 }
 
-std::string Perro::getRaza() {
-    return raza;
+std::string Perro::getRazaNombre() {
+    if (pRaza != nullptr) {
+        return pRaza->getNombre();
+    } else {
+        return "No definida";
+    }
 }
 
-void Perro::setRaza(std::string raza) {
-    this->raza = raza;
+std::string Perro::getRazaPais() {
+    if (pRaza != nullptr) {
+        return pRaza->getPaisOrigen();
+    } else {
+        return "No definido";
+    }
 }
 
 std::string Perro::getNombre() {
