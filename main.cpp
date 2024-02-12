@@ -1,22 +1,41 @@
+// main.cpp
+
 #include <iostream>
 #include "Perro.h"
-#include "Propietario.h"
 
 int main() {
+    // Crear objeto de la clase Perro con el constructor con parámetros
+    Perro* miPerro = new Perro("Buddy", 3, "Labrador", "Dorado", 
+"Mediano");
 
-    // Instanciar
-    Perro firulais;
-    firulais.setNombre("Firulais");
-    firulais.setColor("Negro");
-    firulais.setEdad(5);
-    firulais.setTamanio("Grande");
-    firulais.setRaza("Mastin napolitano");
+    // Llamar al método ladrar
+    miPerro->ladrar();
 
-    //Agregar un nuevo pPropietario a Firulais
-    firulais.agregarPropietario("Carlos Zapata", "102842313");
+    // Crear objeto de la clase Propietario con el constructor con un solo 
+parámetro
+    Propietario* nuevoPropietario = new Propietario("TuNombre", 
+"123456789", 30);
 
-    // Consultar el nombre del pPropietario del perro Firulais
-    std::cout<< "El nombre del pPropietario del perro "<<firulais.getNombre() << " es " << firulais.getPropietario()->getNombre()<<std::endl;
+    // Usar los sets para definir el resto de atributos
+    nuevoPropietario->setNombre("TuNombre");
+    nuevoPropietario->setDocIdentidad("123456789");
+    nuevoPropietario->setEdad(30);
+
+    // Imprimir información del propietario usando el método mostrarInfo
+    nuevoPropietario->mostrarInfo();
+
+    // Relacionar el Perro con el nuevo Propietario usando 
+agregarPropietario
+    miPerro->agregarPropietario("TuNombre", "123456789", 30);
+
+    // Consultar el documento de identidad del propietario del Perro
+    std::cout << "Documento de identidad del propietario del perro: " << 
+miPerro->getPropietario()->getDocIdentidad() << std::endl;
+
+    // Liberar la memoria asignada dinámicamente
+    delete miPerro;
+    delete nuevoPropietario;
 
     return 0;
 }
+
