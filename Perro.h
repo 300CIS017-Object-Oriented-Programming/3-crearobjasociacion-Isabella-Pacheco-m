@@ -1,44 +1,47 @@
 //
 // Created by lufe0 y Gonzo Feb2024.
-//
-#ifndef PERRO_H
-#define PERRO_H
+// propietario.cpp
 
-#include <string>
-#include <iostream>
 #include "Propietario.h"
+#include <iostream>
 
-class Perro {
-private:
-    int edad;
-    std::string nombre;
-    std::string raza;
-    std::string tamanio;
-    std::string color;
-    Propietario* pPropietario;
+Propietario::Propietario() {
+    // Constructor por defecto
+}
 
-public:
-    Perro();
-    ~Perro(); //Destructor
-    void ladrar();
-    Propietario * getPropietario();
+Propietario::Propietario(std::string nombre, std::string docIdentidad, int 
+edad)
+    : nombre(nombre), docIdentidad(docIdentidad), edad(edad) {
+    // Constructor con parámetros usando lista de inicialización
+}
 
-    // Sirve para.......
-    void agregarPropietario(std::string nombre, std::string docIdentidad);
+void Propietario::mostrarInfo() {
+    // Método para mostrar información
+    std::cout << "Nombre: " << nombre << ", Documento de Identidad: " << 
+docIdentidad << ", Edad: " << edad << std::endl;
+}
 
-    // Sirve para relacionar dos clases cuando ya se tiene un objeto
-    void setPropietario(Propietario * pPropietario);
+std::string Propietario::getNombre() {
+    return nombre;
+}
 
+void Propietario::setNombre(std::string nombre) {
+    this->nombre = nombre;
+}
 
-    int getEdad();
-    void setEdad(int edad);
-    std::string getRaza();
-    void setRaza(std::string raza);
-    std::string getNombre();
-    void setNombre(std::string nombre);
-    std::string getTamanio();
-    void setTamanio(std::string tamanio);
-    std::string getColor();
-    void setColor(std::string color);
-};
-#endif
+std::string Propietario::getDocIdentidad() {
+    return docIdentidad;
+}
+
+void Propietario::setDocIdentidad(std::string docIdentidad) {
+    this->docIdentidad = docIdentidad;
+}
+
+int Propietario::getEdad() {
+    return edad;
+}
+
+void Propietario::setEdad(int edad) {
+    this->edad = edad;
+}
+

@@ -1,31 +1,40 @@
+// perro.cpp
+
 #include "Perro.h"
 #include <iostream>
 
-
-// Ejemplo de constructor por defecto con lista inicializadora
-// Perro::Perro() : edad(0), raza(""), tamanio(""), color("") {}
-
-// Ejemplo de constructor por defecto iniciando los atributos en el cuerpo del constructor
 Perro::Perro() {
+    // Constructor por defecto
     this->edad = 0;
     this->raza = "";
     this->tamanio = "";
     this->color = "";
+    this->pPropietario = nullptr; // Inicializar el puntero a nullptr
+}
+
+Perro::Perro(std::string nombre, int edad, std::string raza, std::string 
+color, std::string tamanio)
+    : nombre(nombre), edad(edad), raza(raza), color(color), 
+tamanio(tamanio), pPropietario(nullptr) {
+    // Constructor con parámetros usando lista de inicialización
 }
 
 void Perro::ladrar() {
     std::cout << "Guau Guau" << std::endl;
 }
 
-void Perro::agregarPropietario(std::string nombre, std::string docIdentidad) {
-    // Asocia a la variable de instancia pPropietario un nuevo pPropietario
+void Perro::agregarPropietario(std::string nombre, std::string 
+docIdentidad, int edad) {
+    // Asocia a la variable de instancia pPropietario un nuevo 
+pPropietario
     // Es memoria dinámica, en el destructor se debe liberar
-    this->pPropietario = new Propietario(nombre, docIdentidad);
+    this->pPropietario = new Propietario(nombre, docIdentidad, edad);
 }
 
 void Perro::setPropietario(Propietario *pPropietario) {
     this->pPropietario = pPropietario;
 }
+
 Propietario *Perro::getPropietario() {
     return this->pPropietario;
 }
@@ -46,20 +55,20 @@ void Perro::setRaza(std::string raza) {
     this->raza = raza;
 }
 
-std::string Perro::getTamanio() {
-    return tamanio;
-}
-
-void Perro::setTamanio(std::string tamanio) {
-    this->tamanio = tamanio;
-}
-
 std::string Perro::getNombre() {
     return nombre;
 }
 
 void Perro::setNombre(std::string nombre) {
     this->nombre = nombre;
+}
+
+std::string Perro::getTamanio() {
+    return tamanio;
+}
+
+void Perro::setTamanio(std::string tamanio) {
+    this->tamanio = tamanio;
 }
 
 std::string Perro::getColor() {
@@ -73,7 +82,5 @@ void Perro::setColor(std::string color) {
 Perro::~Perro() {
     delete pPropietario;
 }
-
-
 
 
