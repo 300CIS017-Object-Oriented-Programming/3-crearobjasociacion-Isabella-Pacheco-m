@@ -9,13 +9,12 @@ Perro::Perro() {
     this->raza = "";
     this->tamanio = "";
     this->color = "";
-    this->pPropietario = nullptr; // Inicializar el puntero a nullptr
+    this->pPropietario = nullptr;
+    this->pVeterinario = nullptr; // Inicializar el puntero a nullptr
 }
 
-Perro::Perro(std::string nombre, int edad, std::string raza, std::string 
-color, std::string tamanio)
-    : nombre(nombre), edad(edad), raza(raza), color(color), 
-tamanio(tamanio), pPropietario(nullptr) {
+Perro::Perro(std::string nombre, int edad, std::string raza, std::string color, std::string tamanio)
+    : nombre(nombre), edad(edad), raza(raza), color(color), tamanio(tamanio), pPropietario(nullptr), pVeterinario(nullptr) {
     // Constructor con parámetros usando lista de inicialización
 }
 
@@ -23,20 +22,24 @@ void Perro::ladrar() {
     std::cout << "Guau Guau" << std::endl;
 }
 
-void Perro::agregarPropietario(std::string nombre, std::string 
-docIdentidad, int edad) {
-    // Asocia a la variable de instancia pPropietario un nuevo 
-pPropietario
+void Perro::agregarPropietario(std::string nombre, std::string docIdentidad, int edad) {
+    // Asocia a la variable de instancia pPropietario un nuevo pPropietario
     // Es memoria dinámica, en el destructor se debe liberar
     this->pPropietario = new Propietario(nombre, docIdentidad, edad);
 }
 
-void Perro::setPropietario(Propietario *pPropietario) {
+void Perro::setPropietario(Propietario* pPropietario) {
     this->pPropietario = pPropietario;
 }
 
-Propietario *Perro::getPropietario() {
+Propietario* Perro::getPropietario() {
     return this->pPropietario;
+}
+
+void Perro::asociarVeterinario(std::string nombreVeterinario, int aniosExperiencia) {
+    // Asocia a la variable de instancia pVeterinario un nuevo Veterinario
+    // Es memoria dinámica, en el destructor se debe liberar
+    this->pVeterinario = new Veterinario(nombreVeterinario, aniosExperiencia);
 }
 
 int Perro::getEdad() {
@@ -81,6 +84,6 @@ void Perro::setColor(std::string color) {
 
 Perro::~Perro() {
     delete pPropietario;
+    delete pVeterinario;
 }
-
 

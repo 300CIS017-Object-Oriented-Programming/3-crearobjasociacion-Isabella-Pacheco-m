@@ -1,47 +1,45 @@
-//
-// Created by lufe0 y Gonzo Feb2024.
-// propietario.cpp
+// perro.h
 
-#include "Propietario.h"
+#ifndef PERRO_H
+#define PERRO_H
+
+#include <string>
 #include <iostream>
+#include "Propietario.h"
+#include "Veterinario.h" // Incluir la nueva clase Veterinario
 
-Propietario::Propietario() {
-    // Constructor por defecto
-}
+class Perro {
+private:
+    int edad;
+    std::string nombre;
+    std::string raza;
+    std::string tamanio;
+    std::string color;
+    Propietario* pPropietario;
+    Veterinario* pVeterinario; // Nuevo atributo de tipo Veterinario
 
-Propietario::Propietario(std::string nombre, std::string docIdentidad, int 
-edad)
-    : nombre(nombre), docIdentidad(docIdentidad), edad(edad) {
-    // Constructor con parámetros usando lista de inicialización
-}
+public:
+    Perro();
+    Perro(std::string nombre, int edad, std::string raza, std::string color, std::string tamanio);
+    ~Perro();
+    void ladrar();
+    Propietario* getPropietario();
+    void agregarPropietario(std::string nombre, std::string docIdentidad, int edad);
+    void setPropietario(Propietario* pPropietario);
+    int getEdad();
+    void setEdad(int edad);
+    std::string getRaza();
+    void setRaza(std::string raza);
+    std::string getNombre();
+    void setNombre(std::string nombre);
+    std::string getTamanio();
+    void setTamanio(std::string tamanio);
+    std::string getColor();
+    void setColor(std::string color);
 
-void Propietario::mostrarInfo() {
-    // Método para mostrar información
-    std::cout << "Nombre: " << nombre << ", Documento de Identidad: " << 
-docIdentidad << ", Edad: " << edad << std::endl;
-}
+    // Nuevo método para asociar un veterinario al perro
+    void asociarVeterinario(std::string nombreVeterinario, int aniosExperiencia);
+};
 
-std::string Propietario::getNombre() {
-    return nombre;
-}
-
-void Propietario::setNombre(std::string nombre) {
-    this->nombre = nombre;
-}
-
-std::string Propietario::getDocIdentidad() {
-    return docIdentidad;
-}
-
-void Propietario::setDocIdentidad(std::string docIdentidad) {
-    this->docIdentidad = docIdentidad;
-}
-
-int Propietario::getEdad() {
-    return edad;
-}
-
-void Propietario::setEdad(int edad) {
-    this->edad = edad;
-}
+#endif // PERRO_H
 
